@@ -1,0 +1,157 @@
+.orders {
+    font-size: 14px;
+    width: 95%;
+    margin: auto;
+    background: var(--dark-gray);
+    /******Order Navigator*****/
+    .orders-nav {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0;
+        &::after {
+            content: '';
+            display: block;
+            background: gray;
+            height: 1px;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+        /*Order status*/
+        .orders-status {
+            display: inline-block;
+            height: 100%;
+            width: 50%;
+            ul {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 24px;
+                @include myfont;
+                height: 100%;
+                li {
+                    display: inline-block;
+                    position: relative;
+                    height: 100%;
+                    vertical-align: middle;
+                    a {
+                        color: rgba(1, 1, 1, .5);
+                        text-decoration: none;
+                        text-transform: capitalize;
+                        position: relative;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .active-link {
+                        color: blue;
+                    }
+                }
+            }
+        }
+        /*Order search bar*/
+        .search-bar {
+            height: 100%;
+            display: inline-block;
+            margin-left: auto;
+            input {
+                display: inline-block;
+                position: relative;
+                top: 25%;
+                padding: 0.5em;
+            }
+            .fa-search {
+                position: relative;
+                top: 33%;
+                font-size: 36px;
+            }
+            select {
+                position: relative;
+                top: 25%;
+                padding: 0.5em 0;
+            }
+        }
+    }
+    /*Header of orders*/
+    .orders-header {
+        width: 100%;
+        position: relative;
+        padding-top: 1em;
+        table {
+            @include myfont;
+            border-collapse: collapse;
+            width: 100%;
+            tr.header-row {
+                width: 100%;
+                padding: 50px 0;
+                th {
+                    padding: 0 0 2em $leftRowPadding;
+                    background-color: var(--dark-gray);
+                    text-align: left;
+                    vertical-align: middle;
+                }
+            }
+            tr.order-row {
+                width: 100%;
+                height: 100px;
+                border: none;
+                background-color: white;
+                td {
+                    text-align: left;
+                    vertical-align: middle;
+                    padding-left: $leftRowPadding;
+                }
+                .profile {
+                    display: inline-block;
+                    position: relative;
+                    height: 50px;
+                    width: 50px;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        display: inline-block;
+                        border-radius: 50%;
+                        position: relative;
+                    }
+                }
+                td.fulfillment-box,
+                td.status-box {
+                    .box {
+                        padding: 1em;
+                        color: white;
+                        display: inline-block;
+                        text-align: center;
+                        border-radius: 5px;
+                        @include myfont;
+                        font-size: 1.5rem;
+                    }
+                    .unfulfilled,
+                    .authorized {
+                        background: orange;
+                    }
+                    .pending {
+                        background: purple;
+                    }
+                    .fulfilled,
+                    .paid {
+                        background: limegreen;
+                    }
+                }
+            }
+            tr.grayed-row {
+                width: 100%;
+                background-color: var(--dark-gray);
+                height: 25px;
+            }
+        }
+    }
+}

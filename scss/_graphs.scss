@@ -1,0 +1,50 @@
+.graphs {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: var(--dark-gray);
+    margin: auto;
+    justify-content: space-between;
+    .graph-container {
+        height: auto;
+        width: 20%;
+        background: white;
+        border-radius: 15px;
+        .left-side {
+            width: 50%;
+            float: left;
+            vertical-align: middle;
+            text-align: left;
+            .graph-type {
+                font-size: 24px;
+                color: gray;
+                padding-left: 50px;
+                @include myfont;
+                padding-bottom: 10px;
+                padding-top: 10px;
+                height: 50%;
+            }
+            .graph-num {
+                font-size: 36px;
+                color: black;
+                @include myfont;
+                padding-left: 50px;
+                padding-bottom: 10px;
+                height: 50%;
+                position: relative;
+                bottom: 0;
+                left: 0;
+            }
+        }
+        .right-side {
+            width: 50%;
+            float: right;
+            img {
+                max-width: 100%;
+                height: auto;
+                padding: 0 10px;
+            }
+        }
+    }
+}

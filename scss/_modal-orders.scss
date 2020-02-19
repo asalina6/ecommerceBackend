@@ -1,0 +1,107 @@
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background: rgba(1, 1, 1, .5);
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: -1px -2px 22px 0px rgba(0, 0, 0, 0.75);
+    &-order {
+        display: none;
+    }
+    .modal-content {
+        height: 500px;
+        width: 700px;
+        max-width: 100%;
+        max-height: 100%;
+        background: gray;
+        outline: 1em lightgray solid;
+        padding: 0;
+        overflow: auto;
+        &-error {
+            text-align: center;
+            font-size: 3rem;
+        }
+        .modal-content__modal-error {
+            font-size: 2rem;
+            display: block;
+            background: red;
+            color: white;
+            text-align: center;
+        }
+        .modal-content__modal-success {
+            font-size: 2rem;
+            display: block;
+            background: green;
+            color: white;
+            text-align: center;
+        }
+        .modal-content__cancel {
+            font-size: 3rem;
+            float: right;
+            padding-right: 0.5em;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        form {
+            @include myfont;
+            margin: 0 auto;
+            width: 50%;
+            height: 100%;
+            padding: 1em;
+            text-align: center;
+            background: gray;
+            font-size: 3rem;
+            input,
+            label,
+            select {
+                margin: 0 auto;
+                display: block;
+                padding: 0.25em;
+            }
+            input,
+            select {
+                height: 25px;
+                width: 75%;
+                border: 1px solid black;
+                box-shadow: inset -1px -6px 23px -8px rgba(0, 0, 0, 0.75);
+                &:focus {
+                    border-color: var(--light-gray);
+                    outline: 1px solid var(--light-gray);
+                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(152, 203, 232, .6);
+                }
+            }
+            input {
+                padding: 1em;
+            }
+            .focus-state {
+                color: #98cbe8;
+            }
+            .submit-btn {
+                display: inline-block;
+                color: white;
+                background: green;
+                font-size: 1.5rem;
+                font-weight: 600;
+                padding: 0.5em;
+                margin-top: 1em;
+                border-radius: 5px;
+                text-transform: capitalize;
+                @include myfont;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+        .input-invalid {
+            font-size: 1rem;
+            color: red;
+        }
+    }
+}
