@@ -10,7 +10,5 @@
     <meta name="description" content="eCommerce site that I made">
     <title>The Cube - Backend</title>
     <link rel="shortcut icon" type="image/x-icon" href="./cube.ico" />
-    <link href="/css/main.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/e6db18745a.js"></script>
-    <script defer src="js/ecommerce.js"></script>
+    <link href="./css/main.css" rel="stylesheet">
 </head>

@@ -310,5 +310,6 @@
             </div>
         </section>
     </div>
-
+    <script src="https://kit.fontawesome.com/e6db18745a.js"></script>
+    <script defer src="js/ecommerce.js"></script>
 </body>
