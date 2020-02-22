@@ -5,10 +5,10 @@ session_start();
      <div class="loginModal">
          <div class="loginModal__content">
              <h1>Login</h1>
-             <form action="" method="POST">
+             <form action="./inc/login.inc.php" method="POST">
                  <div>
                      <label for="username">Username </label>
-                     <input type="text" id="username" name="username" maxlength="30" placeholder="Enter username" autocomplete required value="<?php echo ($_GET['user'] ?? '');?>" >
+                     <input type="text" id="username" name="username" maxlength="30" placeholder="Enter username" autocomplete required value="<?php echo ($_GET['username'] ?? '');?>" >
                      <div class="inner">&nbsp;</div>
                  </div>
                  <div>

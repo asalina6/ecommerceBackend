@@ -79,7 +79,7 @@
                     <i class="fas fa-angle-down profile-angle-down">
                     <ul class="drop-down-profile">
                         <li class="drop-down-option">Change Photo</li>
-                        <li class="drop-down-option">Logout</li>
+                        <li class="drop-down-option"><a href="../logout.php">Logout</a></li>
                     </ul>
                 </i>
 

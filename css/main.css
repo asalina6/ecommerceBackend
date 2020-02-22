@@ -1272,7 +1272,7 @@ td.profit::before {
   width: 100%;
 }
 
-.loginModal__content form input:not(placeholder-shown) + .inner {
+.loginModal__content form input:not(:placeholder-shown) + .inner {
   width: 100%;
 }
 
