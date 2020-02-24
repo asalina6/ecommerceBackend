@@ -1,4 +1,5 @@
-<?php session_start();?>
+<?php session_start();
+       include '../config/db.php?';?>
 <body>
     <div class="modal modal-error">
         <div class="modal-content modal-content-error">
@@ -74,17 +75,58 @@
                     <i class="fas fa-bell"></i>
                 </div>
                 <div class="profile">
-                    <img src="https://tinyfac.es/data/avatars/B0298C36-9751-48EF-BE15-80FB9CD11143-500w.jpeg" alt="user-logo">
+                    <?php 
+                        $username = $_SESSION['username'];
+                        $image_query = "SELECT * FROM profile_images WHERE username = '{$username}'";
+                        $result = mysqli_query($conn,$image_query);
+                        if(mysqli_num_rows($result)>0){
+                            $row = mysqli_fetch_assoc($result);
+                            $status = $row['status'];
+                            var_dump();
+                            clearstatcache();
+                            if($status == 0){
+                                echo "<img src='./uploads/profiledefault.png' alt='user-logo'>";
+                            }else{
+                                if(file_exists("./uploads/profile${username}.png")){
+                                    echo "<img src='/uploads/profile${username}.png?'" . mt_rand() . "' alt='user-logo'>";
+                                }else if(file_exists("./uploads/profile${username}.jpg")){
+                                    echo "<img src='/uploads/profile${username}.jpg?'" . mt_rand() . "' alt='user-logo'>";
+                                }else if(file_exists("./uploads/profile${username}.jpeg")){
+                                    echo "<img src='/uploads/profile${username}.jpeg?'" . mt_rand() . "' alt='user-logo'>";
+                                }else{
+                                    echo "<P> IMAGE UPLOAD ERROR </p>";
+                                }
+                            }
+                        }else{
+                            echo "<p> SQL ERROR </p>";
+                        }
+                    ?>
+                    <!--<img src="https://tinyfac.es/data/avatars/B0298C36-9751-48EF-BE15-80FB9CD11143-500w.jpeg" alt="user-logo">-->
                     <!--Source of the above image: https://uifaces.co/-->
                     <i class="fas fa-angle-down profile-angle-down">
                     <ul class="drop-down-profile">
-                        <li class="drop-down-option">Change Photo</li>
+                        <li class="drop-down-option"><a href="../uploadPicture.php">Change Photo</a></li>
                         <li class="drop-down-option"><a href="../logout.php">Logout</a></li>
                     </ul>
-                </i>
+                    </i>
 
                     <!--idea:use css so that way we can use ::after to put the little symbol there-->
+                   
                 </div>
+                <?php
+                    $name_query = "SELECT firstname, lastname FROM employees WHERE username = '" . $_SESSION['username'] . "'";
+                    $name_result = mysqli_query($conn,$name_query);
+                    if(mysqli_num_rows($name_result)>0){
+                        $row = mysqli_fetch_assoc($name_result);
+                        $firstname =  $row['firstname'];
+                        $lastname = $row['lastname']; 
+                        echo "<p>${firstname} ${lastname}";
+                    }else{
+                        echo "<p> SQL ERROR </p>";
+                    }
+                 
+                
+                 ?>
             </div>
 
         </header>
