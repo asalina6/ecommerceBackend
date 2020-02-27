@@ -2,30 +2,7 @@
 window.onload = (function init() {
     var ui = (function() {
         'use strict';
-        //create Order constructor
-        function Order(_createdDate, _customerName, _fulFillment, _total, _profit, _status, _updatedDate, _photo) {
-            if (!(this instanceof Order)) {
-                return new Order(_createdDate, _customerName, _fulFillment, _total, _profit, _status, _updatedDate);
-            }
-            //static variable that will increment by one whenever Order is created.
-            Order.id++;
-            //public variables
-            this.createdDate = _createdDate;
-            this.thiscustomerName = _customerName;
-            this.fulfillment = _fulFillment;
-            this.total = _total;
-            this.profit = _profit;
-            this.status = _status;
-            this.updatedDate = _updatedDate;
-            this.photo = _photo;
-            //NOT Trading off prototypes and improved performance for private variables
-        }
-
-        //initalizes the static variable for our demo
-        Order.id = 121091;
-
-
-        //create the local session storage
+          //create the local session storage
         function Store() {
 
         }
@@ -40,41 +17,6 @@ window.onload = (function init() {
                   }
               };
               Store.setSearchPreference();*/
-
-
-
-
-        /* USING OLD HTTP REQUESTS */
-
-
-        /*function HTTPrequest() {
-            this.http = new XMLHttpRequest();
-        }
-        HTTPrequest.prototype.get = function(url, callback) {
-            this.http.open('GET', url, true);
-            let that = this;
-            this.http.onload = function() {
-                if (that.http.status === 200) {
-                    callback(null, that.http.responseText);
-                } else {
-                    callback('Error: ' + that.http.status, null);
-                }
-            }
-            this.http.send();
-        }
-
-        let http = new HTTPrequest();
-        let response = http.get('./customer_data.json', function getCallbackFunction(err, success) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(success);
-            }
-        });
-
-        console.log(response);
-        //console.log(JSON.parse(response));*/
-
 
         /*********************** Variables****************************/
 
@@ -114,42 +56,6 @@ window.onload = (function init() {
         }
         //****************methods**********************//
 
-        let orderData = [{
-            "order_id": 121091,
-            "created": "Aug 1, 2019",
-            "customer": "Harriet Santiago",
-            "fulfillment": "unfulfilled",
-            "total": 604.50,
-            "profit": 182.50,
-            "status": "authorized",
-            "updated": "11/12/2019",
-            "customer_photo": "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=d5849d81af587a09dbcf3f11f6fa122f",
-            "_comment": "Please update the updated portion so it is today"
-        }, {
-            "order_id": 121090,
-            "created": "July 21, 2019",
-            "customer": "Sara Graham",
-            "fulfillment": "pending receipt",
-            "total": 1175.50,
-            "profit": 524.25,
-            "status": "paid",
-            "updated": "11/12/2019",
-            "customer_photo": "https://randomuser.me/api/portraits/women/68.jpg",
-            "_comment": "Please update the updated portion so it is today"
-        }, {
-            "order_id": 121058,
-            "created": "July 16, 2019",
-            "customer": "Elmer McGee",
-            "fulfillment": "fulfilled",
-            "total": 175.50,
-            "profit": 78,
-            "status": "authorized",
-            "updated": "11/11/2019",
-            "customer_photo": "https://pbs.twimg.com/profile_images/1079706442763067392/wuaeGZnN.jpg",
-            "_comment": "Please update the updated portion so it is yesterday"
-        }]
-
-        /***************************************************************************** */
 
         //recaches the DOM elements that might've been deleted (through loading)
         UI.prototype.refresh = function() {
@@ -183,117 +89,10 @@ window.onload = (function init() {
                 //Make modal inputs and labels into Arrays
                 this.labelArray = [this._customerLabel, this._fulfillmentLabel, this._totalLabel, this._profitLabel, this._statusLabel];
                 this.inputArray = [this._customerInput, this._fulfillmentInput, this._totalInput, this._profitInput, this._statusInput];
-
-                //refresh the paid dropdowns
-                this.loadPaidDropdowns();
-                this.loadAuthorizedDropdowns();
-                //changing paid styling
-
-                /*function getPaidRecords() {
-
-                    return new Promise()
-                    allPaid = 
-                }*/
-            }
-
-            //gets all paid drop downs, adds event listeners
-            UI.prototype.loadPaidDropdowns = function(){
-                    //maybe make this into a prototype method later for paid
-                    this.allPaid = Array.from(document.querySelectorAll('.paid-dropdown'));
-                    this.allPaid.forEach(addPaidEventListener);
-                    function addPaidEventListener(paidDropdown) {
-                        paidDropdown.addEventListener('click', makePaidDropdown);
-                    }
-                    function makePaidDropdown(event) {
-                        //if the parentparentparent is already paid, clicking on paid does not do anything
-                        if(!event.target.parentElement.parentElement.parentElement.classList.contains("paid")){
-                            event.target.parentElement.parentElement.parentElement.outerHTML = `<div class="paid box">paid
-                            <i class="fas fa-angle-down"><ul class="drop-down-order-status">
-                            <li class="drop-down-option-status paid-dropdown">Paid</li>
-                            <li class="drop-down-option-status authorized-dropdown">Authorized</li>
-                            </ul></i></div>`;
-                        }   
-                    }  
             }
 
 
-            //gets all authorized dropdowns, adds event listeners
-            UI.prototype.loadAuthorizedDropdowns = function(){
-                //maybe make this into a prototype method later for authorized
-                this.allAuthorized = Array.from(document.querySelectorAll('.authorized-dropdown'));
-                this.allAuthorized.forEach(addAuthorizedEventListener);
-                function addAuthorizedEventListener(authorizedDropdown){
-                    authorizedDropdown.addEventListener('click',makeAuthorizedDropdown);
-                }
-                function makeAuthorizedDropdown(Event){
-                    //this is the paid/authorized block (li)
-                    console.log(event.target);
-                    //this is the ul
-                    console.log(event.target.parentElement);
-                    //this is the authorized box
-                    console.log(event.target.parentElement.parentElement.parentElement);
 
-                    //Checks to see if it was NOT authorized originally. If it wasn't originally authorized, then it'll perform the change
-                    if(!event.target.parentElement.parentElement.parentElement.classList.contains("authorized")){
-                        event.target.parentElement.parentElement.parentElement.outerHTML = `<div class="authorized box">authorized
-                        <i class="fas fa-angle-down"><ul class="drop-down-order-status">
-                        <li class="drop-down-option-status paid-dropdown">Paid</li>
-                        <li class="drop-down-option-status authorized-dropdown">Authorized</li>
-                        </ul></i></div>`;
-                    } 
-                }
-            }
-
-
-            //loads data and creates the HTML.
-        UI.prototype.loadTableData = function(orderData) {
-                const tableBody = document.querySelector('tbody');
-                let dataHTML = '<tr class="header-row"><th><input type="checkbox" id="maincheck" name="maincheckbox" value="checked"></th><th>Order ID</th><th>Created</th><th>Customer</th><th>Fulfillment</th><th>Total</th><th>Profit</th><th>Status</th><th>Updated</th></tr>';
-
-                for (let order of orderData) {
-                    dataHTML += `<tr class="order-row">
-                <td class="check-box"><input type="checkbox" id="maincheck" name="maincheckbox" value="checked"></td>
-                <td class="order-num">
-                    ${order.order_id}
-                </td>
-                <td class="date-created">
-                    <time datetime="2019-08-01">
-                    ${order.created}
-                </time>
-                </td>
-                <td class="customer-cell">
-                    <div class="profile">
-                        <img src=${order.customer_photo} alt="user-logo">
-                    </div>
-                    <span class="profile-name">${order.customer}</span>
-                </td>
-                <td class="fulfillment-box">
-                    <div class="${order.fulfillment} box">${order.fulfillment} <i class="fas fa-angle-down"></i></div>
-                </td>
-                <td class="total">${order.total}</td>
-                <td class="profit">${order.profit}</td>
-                <td class="status-box">
-                    <div class="${order.status} box">${order.status} <i class="fas fa-angle-down"><ul class="drop-down-order-status">
-                    <li class="drop-down-option-status paid-dropdown">Paid</li>
-                    <li class="drop-down-option-status authorized-dropdown">Authorized</li>
-                </ul></i></div>
-                </td>
-                <td class="updated-box"><time datetime="2019-09-04">Today</time></td>
-            </tr>
-            <tr class="grayed-row">
-            <td class="grayed-cell"></td>
-            <td class="grayed-cell"></td>
-            <td class="grayed-cell"></td>
-            <td class="grayed-cell"></td>
-            <td class="grayed-cell"></td>
-            <td class="grayed-cell"></td>
-            <td class="grayed-cell"></td>
-            <td class="grayed-cell"></td>
-            <td class="grayed-cell"></td>
-        </tr>`
-                    tableBody.innerHTML = dataHTML;
-                }
-            }
             //Filters orders depending on ID# or Name
         UI.prototype.filterOrder = function(event) {
                 //This function will filter the orders in the table by either name or id upon typing in the search bar(EVENT)
@@ -446,7 +245,6 @@ window.onload = (function init() {
                 _total = this._totalInput.value,
                 messages = [], 
                 output = '',
-                grayoutput = _createGrayRow(),
                 tbody = this._tbody;
 
 
@@ -564,49 +362,6 @@ window.onload = (function init() {
                 return orderRow;
 
             }
-            /*
-            //formats an id from ####### to ### ### ###
-            function _formatOrderNumber(orderNum) {
-                let result = '';
-                let finalArray = [];
-                let numberArray = orderNum.toString().split('');
-
-                let numberLength = numberArray.length;
-                let numberOfChunks = Math.floor(numberLength / 3);
-                for (let i = 0; i < numberOfChunks; i++) {
-                    let chunkArray = [];
-                    let chunkIndex = numberArray.length - 3;
-                    chunkArray = numberArray.splice(chunkIndex, 3);
-                    finalArray.push(chunkArray);
-                }
-                console.log(finalArray);
-                finalArray.unshift(numberArray);
-
-                for (let i = 0; i < finalArray.length; i++) {
-                    finalArray[i] = finalArray[i].join('');
-                }
-
-                console.log(finalArray);
-                finalArray = finalArray.join(' ');
-
-                return finalArray;
-            }
-            */
-            //creates a gray row
-            function _createGrayRow() {
-                let grayrow = document.createElement("tr");
-                grayrow.className = "grayed-row";
-
-                for (let i = 1; i <= 9; i++) {
-                    let graycell = document.createElement("td");
-                    graycell.className = "grayed-cell";
-                    grayrow.append(graycell);
-
-                }
-                return grayrow;
-            }
-
-
         }
 
         //shows order modal when you click on the add order button
@@ -715,7 +470,6 @@ window.onload = (function init() {
 
         var ui = new UI();
         //load the orders
-        ui.loadTableData(orderData);
         //refresh the DOM caches since they may have been deleted when loading the table.
         ui.refresh();
 

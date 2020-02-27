@@ -216,142 +216,29 @@
                         <th>Status</th>
                         <th>Updated</th>
                     </tr>
-                    <tr class="order-row">
-                        <td class="check-box"><input type="checkbox" id="maincheck" name="maincheckbox" value="checked"></td>
-                        <td class="order-num">
-                            121
-                            <!-- try puting padding here-->091
-                        </td>
-                        <td class="date-created">
-                            <time datetime="2019-08-01">
-                            Aug 1, 2019
-                        </time>
-                        </td>
-                        <td class="customer-cell">
-                            <div class="profile">
-                                <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=d5849d81af587a09dbcf3f11f6fa122f" alt="user-logo">
-                            </div>
-                            <span class="profile-name">Harriet Santiago</span>
-                        </td>
-                        <td class="fulfillment-box">
-                            <div class="unfulfilled box">unfulfilled <i class="fas fa-angle-down"></i></div>
-                        </td>
-                        <td class="total">604.50</td>
-                        <td class="profit">182.50</td>
-                        <td class="status-box">
-                            <div class="authorized box">Authorized <i class="fas fa-angle-down"><ul class="drop-down-order-status">
-                            <li class="drop-down-option-status paid-dropdown">Paid</li>
-                            <li class="drop-down-option-status authorized-dropdown">Authorized</li>
-                        </ul></i></div>
-                        </td>
-                        <td class="updated-box"><time datetime="2019-09-04">Today</time></td>
-                    </tr>
+                    <?php //The following function imports orders into the table.
+                    require './functions/uploadOrders.php';
 
-
-                    <tr class="grayed-row">
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                    </tr>
-
-                    <tr class="order-row">
-                        <td class="check-box"><input type="checkbox" id="maincheck" name="maincheckbox" value="checked"></td>
-                        <td class="order-num">
-                            121 090
-                        </td>
-                        <td class="date-created">
-                            <time datetime="2019-07-21">
-                                July 21, 2019
-                            </time>
-                        </td>
-                        <td class="customer-cell">
-                            <div class="profile">
-                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="user-logo">
-                            </div>
-                            <span class="profile-name">Sara Graham</span>
-                        </td>
-                        <td class="fulfillment-box">
-                            <div class="pending box">Pending Receipt <i class="fas fa-angle-down"></i></div>
-                        </td>
-                        <td class="total">1,175.50</td>
-                        <td class="profit">524.25</td>
-                        <td class="status-box">
-                            <div class="paid box">Paid
-                                <i class="fas fa-angle-down"><ul class="drop-down-order-status">
-                                <li class="drop-down-option-status paid-dropdown">Paid</li>
-                                <li class="drop-down-option-status authorized-dropdown">Authorized</li>
-                            </ul></i></div>
-                        </td>
-                        <td class="updated-box"> <time datetime="2019-09-04">Today</time></td>
-                    </tr>
-
-                    <tr class="grayed-row">
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                    </tr>
-
-                    <tr class="order-row">
-                        <td class="check-box"><input type="checkbox" id="maincheck" name="maincheckbox" value="checked"></td>
-                        <td class="order-num">
-                            121 058
-                        </td>
-                        <td class="date-created">
-                            <time datetime="2019-07-16">
-                                    July 16, 2019
-                                </time>
-                        </td>
-                        <td class="customer-cell">
-                            <div class="profile">
-                                <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="user-logo">
-                            </div>
-                            <span class="profile-name">Elmer McGee</span>
-                        </td>
-                        <td class="fulfillment-box">
-                            <div class="fulfilled box">Fulfilled <i class="fas fa-angle-down"></i></div>
-                        </td>
-                        <td class="total">175.50</td>
-                        <td class="profit">78</td>
-                        <td class="status-box">
-                            <div class="authorized box">Authorized <i class="fas fa-angle-down">  <ul class="drop-down-order-status">
-                            <li class="drop-down-option-status paid-dropdown">Paid</li>
-                            <li class="drop-down-option-status authorized-dropdown">Authorized</li>
-                        </ul></i></div>
-                        </td>
-                        <td class="updated-box"> <time datetime="2019-09-03">Yesterday</time></td>
-                    </tr>
-
-                    <tr class="grayed-row">
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                        <td class="grayed-cell"></td>
-                    </tr>
-
-
-
-
+                    $import_query = 'SELECT * FROM table_orders';
+                    $import_result = mysqli_query($conn,$import_query);
+                    while($import_row = mysqli_fetch_assoc($import_result)){
+                        $order_id = $import_row["order_id"];
+                        $date_created = $import_row["date_created"];
+                        $customer_firstname = $import_row["customer_firstname"];
+                        $customer_lastname = $import_row["customer_lastname"];
+                        $fulfillment = $import_row["fulfillment"];
+                        $total = $import_row["total"];
+                        $profit = $import_row["profit"];
+                        $order_status = $import_row["order_status"];
+                        $date_updated =$import_row["date_updated"];
+                        createOrderRow($order_id,$date_created,$customer_firstname,$customer_lastname,$fulfillment,$total,$profit,$order_status,$date_updated);
+                        createGrayRows();
+                    }
+                    ?>
                 </table>
             </div>
         </section>
     </div>
     <script src="https://kit.fontawesome.com/e6db18745a.js"></script>
-    <script defer src="js/ecommerce.js"></script>
+    <script src="js/ecommerce.js"></script>
 </body>
