@@ -1,4 +1,5 @@
 <?php
+include '../config/db.php';
 function createOrderRow($order_id,$date_created,$customer_firstname,$customer_lastname,$fulfillment,$total,$profit,$order_status,$date_updated){
 echo <<<ORDER
    <tr class = "order-row">
@@ -33,7 +34,6 @@ echo <<<ORDER
 </tr>
 ORDER;
 }
-
 function createGrayRows(){
 echo <<<'GRAY'
 <tr class = "grayed-row">
@@ -47,5 +47,42 @@ echo <<<'GRAY'
     <td class = "grayed-cell"></td>
 <td class = "grayed-cell"></td>
 GRAY;
+}
+function paginationHandler(){
+    $results_per_page = 10;
+    //find number of total results
+    $results_query = 'SELECT * FROM tbl_orders';
+    $results_result = mysqli_query($conn,$results_query);
+    $number_of_results = mysqli_num_rows($results_result);
+
+    $number_of_pages = ceil($number_of_results/$results_per_page);
+
+    if(!isset($_GET['page'])){
+        $page = 1;
+    }else{
+        $page = $_GET['page'];
+    }
+
+    //determine sql limit starting number for the results on teh displaying page
+    $this_page_first_result = ($page-1)*$results_per_page;
+
+
+    //retrive results from database and display
+
+    $pull_query = "SELECT * FROM table_orders ORDER BY 2 DESC LIMIT ${this_page_first_result},${results_per_page}";
+    $pull_result = mysqli_query($conn,$pull_query);
+    while($import_row = mysqli_fetch_assoc($pull_result)){
+        $order_id = $import_row["order_id"];
+        $date_created = $import_row["date_created"];
+        $customer_firstname = $import_row["customer_firstname"];
+        $customer_lastname = $import_row["customer_lastname"];
+        $fulfillment = $import_row["fulfillment"];
+        $total = $import_row["total"];
+        $profit = $import_row["profit"];
+        $order_status = $import_row["order_status"];
+        $date_updated =$import_row["date_updated"];
+        createOrderRow($order_id,$date_created,$customer_firstname,$customer_lastname,$fulfillment,$total,$profit,$order_status,$date_updated);
+        createGrayRows();
+    }
 }
 ?>

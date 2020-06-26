@@ -82,7 +82,7 @@
                         if(mysqli_num_rows($result)>0){
                             $row = mysqli_fetch_assoc($result);
                             $status = $row['status'];
-                            var_dump();
+                            //var_dump();
                             clearstatcache();
                             if($status == 0){
                                 echo "<img src='./uploads/profiledefault.png' alt='user-logo'>";
@@ -219,7 +219,7 @@
                     <?php //The following function imports orders into the table.
                     require './functions/uploadOrders.php';
 
-                    $import_query = 'SELECT * FROM table_orders';
+                    $import_query = 'SELECT * FROM table_orders ORDER BY 2 DESC';
                     $import_result = mysqli_query($conn,$import_query);
                     while($import_row = mysqli_fetch_assoc($import_result)){
                         $order_id = $import_row["order_id"];

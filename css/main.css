@@ -898,14 +898,14 @@ section.order .fa-ellipsis-h {
   padding-left: 1em;
 }
 
-.orders .orders-header table tr.order-row .profile {
+.orders .orders-header table tr.order-row td.customer-cell .profile {
   display: inline-block;
   position: relative;
   height: 50px;
   width: 50px;
 }
 
-.orders .orders-header table tr.order-row .profile img {
+.orders .orders-header table tr.order-row td.customer-cell .profile img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -913,6 +913,11 @@ section.order .fa-ellipsis-h {
   display: inline-block;
   border-radius: 50%;
   position: relative;
+}
+
+.orders .orders-header table tr.order-row td.customer-cell .profile-name {
+  padding: 0 0 0 1em;
+  vertical-align: middle;
 }
 
 .orders .orders-header table tr.order-row td.fulfillment-box .box,
@@ -955,10 +960,6 @@ section.order .fa-ellipsis-h {
 .required {
   font-size: 2rem;
   color: red;
-}
-
-span.profile-name {
-  padding: 0 0 0 1em;
 }
 
 td.order-num {
